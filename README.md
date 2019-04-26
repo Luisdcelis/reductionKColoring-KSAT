@@ -1,6 +1,6 @@
 # reduction from KColoring to KSAT
  This code compute the reduction from coloring a graph problem to SAT problem (in DIMACS format for SAT CNF)
- 
+ \n
  Dimacs format for SAT CNF:
       c COMMENTS
       p cnf numVARIABLES numCLAUSES
