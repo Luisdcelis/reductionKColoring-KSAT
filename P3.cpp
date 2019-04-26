@@ -97,16 +97,16 @@ void redKCOL_KSAT(ofstream& f, graph G, int numColors)
         for(int i = numColors*nodoAct; i < (numColors*nodoAct)+numColors; i++)
         {
             // Un nodo tiene que ser uno de los K colores
-            res = res + to_string(i) + " ";
+            res = res + to_string(i+1) + " ";
         }
         res = res + "0\n";
 
-        for(int i = numColors*nodoAct; i < (numColors*nodoAct)+numColors; i++)
+        for(int i = numColors*nodoAct; i < (numColors*nodoAct)+numColors-1; i++)
         {
-            for(int j = i+1; j <= (numColors*nodoAct)+numColors; j++)
+            for(int j = i+1; j <= (numColors*nodoAct)+numColors-1; j++)
             {
                 // Un nodo no puede tener dos colores distintos al mismo tiempo
-                res = res + "-" + to_string(i) + " -" + to_string(j) + " 0\n";
+                res = res + "-" + to_string(i+1) + " -" + to_string(j+1) + " 0\n";
             }
         }
         adj::iterator it = G[nodoAct].begin(); 
@@ -121,7 +121,7 @@ void redKCOL_KSAT(ofstream& f, graph G, int numColors)
                     // hacemos el par
                     for(int i = numColors*nodoAct, j = numColors*(*it); i < (numColors*nodoAct)+numColors; i++, j++)
                     {
-                        res = res + "-" + to_string(i) + " -" + to_string(j) + " 0\n";
+                        res = res + "-" + to_string(i+1) + " -" + to_string(j+1) + " 0\n";
                     }
 
                 }
@@ -132,20 +132,20 @@ void redKCOL_KSAT(ofstream& f, graph G, int numColors)
                 //hacemos el par
                 for(int i = numColors*nodoAct, j = numColors*(*it); i < (numColors*nodoAct)+numColors; i++, j++)
                 {
-                    res = res + "-" + to_string(i) + " -" + to_string(j) + " 0\n";
+                    res = res + "-" + to_string(i+1) + " -" + to_string(j+1) + " 0\n";
                 }
             }
         }
         nodosVisitados.push_back(nodoAct);
     }
-    f << "p cfn " << numVar << " " << count(res.begin(), res.end(), '\n')+1 << "\n" << res;
+    f << "p cnf " << numVar << " " << count(res.begin(), res.end(), '\n') << "\n" << res;
      
 }
 
 int main(int argc, char const *argv[])
 {
     graph G;
-    G = petersenGraph();
+    G = testGraph();
     cronometro c;
     int numColors = 3;
 
