@@ -161,5 +161,4 @@ int main(int argc, char const *argv[])
     cout << "time for " << G.size() << " nodes and " << numColors << " colors: " << c.tiempo() << endl;
 
     return 0;
-
 }
