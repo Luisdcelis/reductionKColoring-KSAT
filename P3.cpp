@@ -113,7 +113,7 @@ void redKCOL_KSAT(ofstream& f, graph G, int numColors)
         for(int posAct = 0; posAct < G[nodoAct].size(); posAct++)
         { 
             //Un nodo no puede tener el mismo color que su adyacente
-            advance(it, posAct);
+            
             if(operatorIN(*it, nodosVisitados)) // Si la posAct es un nodo visitado
             {
                 if(!operatorIN(nodoAct, G[*it])) // si el par que estamos haciendo no ha sido realizado
@@ -135,6 +135,7 @@ void redKCOL_KSAT(ofstream& f, graph G, int numColors)
                     res = res + "-" + to_string(i+1) + " -" + to_string(j+1) + " 0\n";
                 }
             }
+            it++;
         }
         nodosVisitados.push_back(nodoAct);
     }
@@ -145,12 +146,12 @@ void redKCOL_KSAT(ofstream& f, graph G, int numColors)
 int main(int argc, char const *argv[])
 {
     graph G;
-    G = testGraph();
+    G = petersenGraph();
     cronometro c;
     int numColors = 3;
 
     ofstream f;
-    f.open("output.txt");
+    f.open("output.cnf");
 
     c.activar();
     redKCOL_KSAT(f, G, numColors);
