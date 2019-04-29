@@ -7,12 +7,12 @@
 //      (D V F) -> 4 6 0
 
 #include <stdio.h>
-#include<iostream>
+#include <iostream>
 #include <fstream>
 #include <list>
 #include <vector>
 #include <string>
-#include<algorithm>
+#include <algorithm>
 #include "cronometro.hpp"
 
 using namespace std;
