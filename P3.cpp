@@ -77,6 +77,26 @@ graph testGraph()
     return G;
 }
 
+graph complexTimeGraph(int n)
+{
+    // Makes a graph with n nodes and all connected with each others
+    graph G;
+    vector<int> v;
+
+    for(int i = 0; i < n; i++)
+    {
+        v.clear();
+        for(int j = 0; j < n; j++)
+        {
+            if(j != i)
+                v.push_back(j);
+        }
+        adj l(v.begin(), v.end());
+        G.push_back(l);
+    }
+    return G;
+}
+
 bool operatorIN(int i, list<int> V)
 {
     list<int>::iterator it = find(V.begin(),V.end(),i);
@@ -146,11 +166,28 @@ void redKCOL_KSAT(ofstream& f, graph G, int numColors)
 int main(int argc, char const *argv[])
 {
     graph G;
-    G = petersenGraph();
     cronometro c;
+    ofstream f;
     int numColors = 3;
 
-    ofstream f;
+
+    // If  you  want to test the complexity time of the algorithm: 
+    // for(int i  = 5; i <= 100; i +=5)
+    // {
+    //     G = complexTimeGraph(i);
+    //     f.open("output.cnf");
+
+    //     c.activar();
+    //     redKCOL_KSAT(f, G, numColors);
+    //     c.parar();
+
+    //     f.close();
+    //     cout << "time for " << G.size() << " nodes and " << numColors << " colors: " << c.tiempo() << endl;
+    // }
+
+
+    // If you want to do the reduction to one concrete graph:
+    G = petersenGraph();
     f.open("output.cnf");
 
     c.activar();
@@ -158,7 +195,6 @@ int main(int argc, char const *argv[])
     c.parar();
 
     f.close();
-
     cout << "time for " << G.size() << " nodes and " << numColors << " colors: " << c.tiempo() << endl;
 
     return 0;
